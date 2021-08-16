@@ -1,0 +1,23 @@
+{% extends 'base/base_genres.html' %}
+{% block title %}
+    Create Genres
+{% endblock title %}
+{% block content %}
+<div class="col-md-8 offset-md-2">
+    <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label for="">{{field.label}}</label>
+                {{field}}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <p style="color:red" >{{error}}</p> 
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% endfor %}
+        <input type="submit" class="btn btn-success" value="Add-Genres">
+    </form> 
+</div>
+{% endblock content %}

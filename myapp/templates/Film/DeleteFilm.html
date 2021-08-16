@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+{% block title %}
+    Delete Film
+{% endblock title%}
+{% block content %}
+    <div class="col-12">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <h1>bạn có muốn xóa <span style="color: red;">{{object.title}}</span> không</h1>
+            <input type="submit" name="" value="Đồng ý">
+        </form>
+    </div>
+{% endblock content %}

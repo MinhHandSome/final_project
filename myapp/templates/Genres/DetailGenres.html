@@ -1,0 +1,29 @@
+{% extends 'base/base_genres.html' %}
+{% block title %}
+List Genres
+{% endblock title %}
+{% block content %}
+<div class="col-12">
+    <h1>Các Phim thuộc thể loại: {{genres.name}}</h1>
+
+    <div class="row justify-content-center">
+    {% for film in genres.film_set.all %}
+    <div class="col-md-3">
+            <a href="{% url 'view_film' pk=film.id%}">
+                <div class="border border-primary" style="margin-top: 50px;">
+
+                    <img src="{{film.image_url}}" class="card-img-top" style="height: 414px; max-width:100%" alt="...">
+    
+                    <div class="card-body">
+                        <p class="card-text">{{film.title}}</p>
+                        <a href="{% url 'edit_film' pk=film.id %}"><i class="bi bi-pencil"></i> </a> |
+                        <a href="{% url 'remove_film' pk=film.id %}"><i class="bi bi-trash"></i> </a>
+                    </div>
+                </div>
+            </a>
+        </div>
+    <!-- <li>{{film.title}}</li> -->
+    {% endfor %}
+    </div>
+</div>
+{% endblock content %}

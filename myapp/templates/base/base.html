@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {%load static%}
+  <title>{% block title %}
+
+    {% endblock title %}</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-icons.css' %}">
+  <script src="{% static 'js/jquery-3.6.0.min.js'%}"></script>
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'index'%}">XemPhim</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'all_film'%}">List Phim <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'insert_director'%}">Director</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'all_genres'%}">Genres</a>
+          </li>
+
+        </ul>
+        <ul class="nav nav-pills justify-content-end">
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'logout_user' %}">Logout</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Welcome</a></li>
+          {% else %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'register_user' %}">Register</a></li>
+          {% endif %}
+      </ul>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'all_film' %}">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search"  name="search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+        </form>
+      </div>
+    </nav>
+
+    <div class="row">
+      {% block content %}
+
+      {% endblock content %}
+    </div>
+  </div>
+  <script src="{% static 'js/bootstrap.min.js'%}"></script>
+</body>
+
+</html>

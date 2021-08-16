@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+{% block title %}
+Detail Film
+{% endblock title %}
+{% block content %}
+<div class="col-12" style="background: url(https://mezoom.net/wp-content/uploads/2020/03/sao.jpg);">
+    <div class="row" >
+        <div class="col-6">
+            <img src="{{film.image_url}}" alt="">
+            <button style="width:343px; margin-top: 25px; height:60px" type="button" class="btn btn-danger">Xem Phim</button>
+        </div>
+        <div class="col-6 " style="color:blanchedalmond;">
+            <h1 style="margin-top: 25px ;">{{film.title}}</h1>
+            <h3 style="margin-top: 25px ;" >Thể Loại: <span style="color: white;"> {{film.genres.name}} </span>  </h3>
+            <h3 style="margin-top: 25px ;" >Điểm IMDb: <span style="color: white;"> {{film.rated}}/10</span>  </h3>
+            <h4 style="margin-top: 25px;  " >Thời lượng:  <span  style="color: white;"> {{film.runtime}} phút</span></h4>
+            <h4 style="margin-top: 25px ;" >Đạo Diễn: <span style="color: white;">{{film.director.name}} </span></h4>
+            <h4 style="margin-top: 25px ;" >Diễn viên: <span style="color: white;">{{film.actor}}</span> </h4>
+            <h4 style="margin-top: 25px ;" >Nội Dung Phim:</h4>
+            <span style="font-size: 15  px; color:white">{{film.content}}</span>
+        </div>
+        <div class="col-md-8 offset-md-2" style="margin-top: 30px;">
+            <h4 style="color:greenyellow;"> Xem Trailer</h4>
+            <iframe width="600" height="315" src="{{film.video_url}}" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+{% endblock content %}

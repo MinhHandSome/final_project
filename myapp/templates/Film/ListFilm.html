@@ -1,0 +1,89 @@
+{% extends 'base/base.html' %}
+{% block title %}
+List Film
+{% endblock title %}
+{%load myfilter %}
+{% block content %}
+<div class="col-12" style="margin-top: 30px;">
+   <a href="{% url 'insert_film'%}"> <button type="button" class="btn btn-primary">Add Film</button></a>
+</div>
+<div class="col-12">
+    <div class="row justify-content-center">
+        {% for film in all_films %}
+        <div class="col-md-3">
+            <a href="{% url 'view_film' pk=film.id%}">
+                <div class="border border-primary" style="margin-top: 50px;">
+
+                    <img src="{{film.image_url}}" class="card-img-top" style="height: 414px; max-width:100%" alt="...">
+    
+                    <div class="card-body">
+                        <p class="card-text">{{film.title}}</p>
+                        <a href="{% url 'edit_film' pk=film.id %}"><i class="bi bi-pencil"></i> </a> |
+                        <a href="{% url 'remove_film' pk=film.id %}"><i class="bi bi-trash"></i> </a>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination"> 
+        <li class="page-item">
+            <a title="Go First Page" class="page-link" href="?page=1" aria-label="First">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number}}" aria-label="Previous">
+                <span aria-hidden="true">&lsaquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&lsaquo;</span>
+            </a>
+        </li>
+        {% endif %}
+        {% for page_index in page_obj.paginator.num_pages|make_range %}
+        {% if page_index == page_obj.number %}
+        <li class="page-item active"><a class="page-link" href="?page={{ page_index }}">{{page_index}}</a></li>
+        {% else %}
+        <li class="page-item "><a class="page-link" href="?page={{ page_index }}">{{page_index}}</a></li>
+        {% endif %}
+
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number}}" aria-label="Next">
+                <span aria-hidden="true">&lsaquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&rsaquo;</span>
+            </a>
+        </li>
+        {% endif %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- <div class="col-md-12 justify-content-center" >
+    {% for film in all_films %}
+    <div class="card" style="width: 18rem;" stytle="">  
+        <img src="{{film.image_url}}" class="card-img-top" alt="">
+        <div class="card-body">
+            <p class="card-text">{{film.title}}</p>
+        </div>
+    </div>
+    {% endfor %} -->
+
+<!-- </div> -->
+{% endblock content %}
