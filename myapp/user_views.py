@@ -42,7 +42,7 @@ def login_user(request):
                     return HttpResponseRedirect(request.GET.get('next'))
                 return redirect('index')
             else :
-                messages = "Thông tin sai. Vui lòng nhập lại"
+                message = "Thông tin sai. Vui lòng nhập lại"
         if not request.POST.get('remember_me', None):
             request.session.set_expiry(0)
     return render(

@@ -51,3 +51,4 @@ def api_create_film(request):
     return Response(data={
         "message":f"Film id created {create_id}"
     },status=201)
+    
